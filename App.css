@@ -1,0 +1,9 @@
+#snake-grid{
+    display: grid;
+    grid-template-columns: repeat(var(--columns),1fr);
+    grid-template-rows: repeat(var(--rows),1fr);
+    transition: 1s;
+}
+.head, .snake-piece {
+    transition: 500ms;
+}
