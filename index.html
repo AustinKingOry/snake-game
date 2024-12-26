@@ -11,19 +11,20 @@
 <body class="fixed h-screen w-screen overflow-hidden bg-gray-700">
     <div class="container max-w-7xl h-full w-full mx-auto flex items-center justify-center">
         <div id="game-frame" class="cursor-pointer relative min-w-96 w-[480px] max-w-xl h-[540px] border rounded-0 shadow-md bg-gray-50 mx-auto">
-            <div class="absolute top-4 right-4">
-                <button id="reset-game" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                    Reset Game
-                </button>
-            </div>
             <div class="h-full w-full overflow-hidden" id="snake-grid">
             </div>
         </div>
-        <div class="controls">
-            <button id="move-up" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Up</button>
-            <button id="move-down" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Down</button>
-            <button id="move-left" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Left</button>
-            <button id="move-right" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Right</button>
+        <div class="relative">
+            <div class="text-xl font-mono text-white font-bold">Score <span id="score">0</span></div>
+            <div class="controls">
+                <button id="move-up" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Up</button>
+                <button id="move-down" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Down</button>
+                <button id="move-left" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Left</button>
+                <button id="move-right" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Right</button>
+                <button id="reset-game" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Reset
+                </button>
+            </div>
         </div>
     </div>
     <script src="./App.js"></script>

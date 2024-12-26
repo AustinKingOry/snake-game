@@ -88,6 +88,7 @@ $(document).ready(function (){
         if(newHead === food) {
             score += 10;
             $(".tile").eq(food).removeClass("bg-blue-600 food");
+            $("#score").text(score);
             createFood();
         } else {
             // Remove tail
