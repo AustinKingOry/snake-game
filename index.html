@@ -7,41 +7,49 @@
     <link rel="stylesheet" href="./App.css">
     <script src="../plugins/tailwind.js"></script>
     <script src="../plugins/jquery-3.7.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="fixed h-screen w-screen overflow-hidden bg-gray-700">
     <div class="container max-w-7xl h-full w-full mx-auto flex flex-col items-center justify-center gap-4">
-        <div class="text-xl font-mono text-white font-bold">Score: <span id="score">0</span></div>
-        <div id="game-frame" class="cursor-pointer relative min-w-96 w-[480px] max-w-xl h-[540px] border rounded-0 shadow-md bg-gray-50 mx-auto">
-            <div class="h-full w-full" id="snake-grid">
+        <div id="game-frame" class="cursor-pointer relative w-[480px] h-[540px] border rounded-0 shadow-md bg-gray-50 mx-auto">
+            <div class="h-[95%] w-full bg-gray-50 overflow-hiddens pb-8 pr-8" id="snake-grid">
+            </div>
+            <div class="w-full h-[5%] bg-gray-50 flex flex-row justify-between">
+                <button id="toogle-controls" class="flex items-center justify-center w-10 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
+                    <i class="bi-keyboard"></i>
+                </button>
+                <div class="text-xl font-mono text-gray-600 font-bold">Score: <span id="score">0</span></div>
             </div>
         </div>
         <div class="relative w-72 flex flex-row gap-2">
-            <div class="controls grid grid-cols-2 gap-2 bg-gray-500 rounded-md border w-48">
+            <div class="controls grid grid-cols-2 gap-1 bg-gray-500 rounded-md border w-32 h-32">
                 <div class="col-span-2 flex items-start justify-center">
-                    <button id="move-up" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-up" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-up-short"></i>
                     </button>
                 </div>
                 <div class="col-span-2 flex flex-row justify-between gap-2">                    
-                    <button id="move-left" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-left" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-left-short"></i>
                     </button>
-                    <button id="reset-game" class="w-fit h-fit px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="reset-game" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-counterclockwise"></i>
                     </button>
-                    <button id="move-right" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-right" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-right-short"></i>
                     </button>
                 </div>
                 <div class="col-span-2 flex items-end justify-center">
-                    <button id="move-down" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-down" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-down-short"></i>
                     </button>
                 </div>
             </div>
         </div>
-    </div>
+    </div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
     <script src="./App.js"></script>
 </body>
 </html>
