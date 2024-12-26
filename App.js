@@ -5,6 +5,7 @@ $(document).ready(function (){
     const tileHeight = 12;
     let columns = Math.floor(snakeGrid.width()/tileWidth);
     let rows = Math.floor(snakeGrid.height()/tileHeight);
+    const toast = document.getElementById('responseToast');
     
     // Game state
     let score = 0;
@@ -196,7 +197,9 @@ $(document).ready(function (){
     // end game 
     const endGame = () => {
         gameOver = true;
-        alert(`Game Over! Score: ${score}`);
+        $("#toast-message").html(`Game Over! Score: ${score}`);
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+        toastBootstrap.show();
     }
 
     // handle custom navigation button

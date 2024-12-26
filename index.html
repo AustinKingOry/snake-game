@@ -14,13 +14,20 @@
 <body class="fixed h-screen w-screen overflow-hidden bg-gray-700">
     <div class="container max-w-7xl h-full w-full mx-auto flex flex-col items-center justify-center gap-4">
         <div id="game-frame" class="cursor-pointer relative w-[480px] h-[540px] border rounded-0 shadow-md bg-gray-50 mx-auto">
-            <div class="h-[95%] w-full bg-gray-50 overflow-hiddens pb-8 pr-8" id="snake-grid">
+            <div class="h-[95%] w-full bg-gray-50 overflow-hiddens pb-8 pr-[34px]" id="snake-grid">
             </div>
             <div class="w-full h-[5%] bg-gray-50 flex flex-row justify-between">
                 <button id="toggle-controls" class="flex items-center justify-center w-10 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
                     <i class="bi-keyboard"></i>
                 </button>
                 <div class="text-xl font-mono text-gray-600 font-bold">Score: <span id="score">0</span></div>
+                <div class="toast align-items-center text-bg-primary border-0 fixed bottom-1 right-1" id="responseToast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                    <div class="toast-body" id="toast-message"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                  
             </div>
         </div>
         <div class="relative w-72 hidden flex-row gap-2" id="controls">
@@ -48,7 +55,8 @@
                 </div>
             </div>
         </div>
-    </div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
     <script src="./App.js"></script>
 </body>
