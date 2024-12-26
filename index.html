@@ -17,14 +17,14 @@
             <div class="h-[95%] w-full bg-gray-50 overflow-hiddens pb-8 pr-8" id="snake-grid">
             </div>
             <div class="w-full h-[5%] bg-gray-50 flex flex-row justify-between">
-                <button id="toogle-controls" class="flex items-center justify-center w-10 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
+                <button id="toggle-controls" class="flex items-center justify-center w-10 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
                     <i class="bi-keyboard"></i>
                 </button>
                 <div class="text-xl font-mono text-gray-600 font-bold">Score: <span id="score">0</span></div>
             </div>
         </div>
-        <div class="relative w-72 flex flex-row gap-2">
-            <div class="controls grid grid-cols-2 gap-1 bg-gray-500 rounded-md border w-32 h-32">
+        <div class="relative w-72 hidden flex-row gap-2" id="controls">
+            <div class="grid grid-cols-2 gap-1 bg-gray-500 rounded-md w-32 h-32">
                 <div class="col-span-2 flex items-start justify-center">
                     <button id="move-up" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-up-short"></i>

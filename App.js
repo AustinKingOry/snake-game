@@ -227,4 +227,9 @@ $(document).ready(function (){
     setInterval(moveSnake, 150);
 
     $("#reset-game").on('click', resetGame);
+    $(document).on("click","#toggle-controls",function (){
+        let isVisible = $("#controls").hasClass("flex");
+        isVisible ? $("#controls").addClass("hidden") : $("#controls").addClass("flex");
+        isVisible ? $("#controls").removeClass("flex") : $("#controls").removeClass("hidden");
+    });
 });
