@@ -26,11 +26,13 @@
             rows = Math.floor(snakeGrid.height()/tileHeight);
             let snakeHeadPosition = 0;
             let targetIndex = 0;
-            let snakeSize = 5;
+            let snakeSize = 2;
             let allDirections = ["top","right","bottom","left"]
             let snakeDirection = allDirections[1];
             let playerDirections = {x:"right",y:"bottom"};
             let changeDirection = false;
+            let snakeRow = 0;
+            let snakeColumn = 0;
 
             const createTile = index =>{
                 const tile = `<div class="tile w-3 h-3 bg-gray-50 text-[6px]" data-index="${index}"></div>`;
@@ -85,7 +87,7 @@
                 })
             }
             const rand = (min, max) => {
-                return Math.floor(Math.random() * (max -min))
+                return Math.floor(Math.random() * (max - min))
             }
             const selectRandom = size => {
                 return rand(0,size-1)
@@ -159,7 +161,10 @@
             */
             function move (clickedRow, clickedColumn,currentTile, stepsX, stepsY) {
                 if(playerDirections.x == "left") {
-                    if(snakeDirection == "right" || snakeDirection == "left"){
+                    if (clickedColumn == snakeColumn) {
+                        moveLeft(currentTile);
+                    }
+                    else if(snakeDirection == "right" || snakeDirection == "left"){
                         if(playerDirections.y == "bottom"){
                             !changeDirection ? moveBottom(currentTile):moveLeft(currentTile);
                         }
@@ -168,8 +173,11 @@
                         }
                     }
                     // moveLeft();
-                } else {
-                    if(snakeDirection == "right" || snakeDirection == "left"){
+                } else if(playerDirections.x == "right"){
+                    if (clickedColumn == snakeColumn) {
+                        moveRight(currentTile);
+                    }
+                    else if(snakeDirection == "right" || snakeDirection == "left"){
                         if(playerDirections.y == "bottom"){
                             !changeDirection ? moveBottom(currentTile):moveRight(currentTile);
                         }
@@ -180,7 +188,10 @@
                     // moveRight();
                 }
                 if(playerDirections.y == "top") {
-                    if(snakeDirection == "top" || snakeDirection == "bottom"){
+                    if (clickedRow == snakeRow) {
+                        moveTop(currentTile);
+                    }
+                    else if(snakeDirection == "top" || snakeDirection == "bottom"){
                         if(playerDirections.x == "right"){
                             !changeDirection ? moveRight(currentTile):moveTop(currentTile);
                         }
@@ -189,8 +200,11 @@
                         }
                     }
                     // moveTop();
-                } else {
-                    if(snakeDirection == "top" || snakeDirection == "bottom"){
+                } else if(playerDirections.y == "bottom"){
+                    if (clickedRow == snakeRow) {
+                        moveBottom(currentTile);
+                    }
+                    else if(snakeDirection == "top" || snakeDirection == "bottom"){
                         if(playerDirections.x == "right"){
                             !changeDirection ? moveRight(currentTile):moveBottom(currentTile);
                         }

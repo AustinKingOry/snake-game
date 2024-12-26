@@ -7,3 +7,7 @@
 .head, .snake-piece {
     transition: 500ms;
 }
+
+.tile {
+    outline: 1px solid rgb(212, 212, 219);
+}
