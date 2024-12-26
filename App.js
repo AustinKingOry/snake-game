@@ -222,6 +222,7 @@ $(document).ready(function (){
 
     // Initialize game
     createGrid();
+    window.onresize = () => createGrid();
     $(document).on('keydown', handleKeyPress);
     // Add click handler
     $(document).on('click', '.tile', handleClick);
