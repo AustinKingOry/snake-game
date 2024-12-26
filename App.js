@@ -27,7 +27,7 @@ $(document).ready(function (){
         } while (snake.body.includes(position));
         
         food = position;
-        $(".tile").eq(position).addClass("bg-blue-600 flex-shrink-0 rounded food");
+        $(".tile").eq(position).addClass("bg-blue-600 flex-shrink-0 !rounded food");
     }
 
     const initializeSnake = () => {
@@ -38,9 +38,9 @@ $(document).ready(function (){
         snake.body.forEach((pos, index) => {
             const tile = $(".tile").eq(pos);
             if(index === 0) {
-                tile.addClass("bg-gray-600 rounded head");
+                tile.addClass("bg-gray-600 !rounded head");
             } else {
-                tile.addClass("bg-gray-500 snake-piece rounded border border-gray-50");
+                tile.addClass("bg-gray-500 snake-piece !rounded !border border-gray-50");
             }
         });
     }
@@ -83,7 +83,7 @@ $(document).ready(function (){
         }
         
         // Clear all tiles that aren't food
-        $(".tile").not(".food").removeClass("bg-gray-600 bg-gray-500 rounded head snake-piece border border-gray-50");
+        $(".tile").not(".food").removeClass("bg-gray-600 bg-gray-500 !rounded head snake-piece !border border-gray-50");
         
         // Check if food is eaten
         if(newHead === food) {
@@ -103,9 +103,9 @@ $(document).ready(function (){
         snake.body.forEach((pos, index) => {
             const tile = $(".tile").eq(pos);
             if(index === 0) {
-                tile.addClass("bg-gray-600 rounded head");
+                tile.addClass("bg-gray-600 !rounded head");
             } else {
-                tile.addClass("bg-gray-500 snake-piece rounded border border-gray-50");
+                tile.addClass("bg-gray-500 snake-piece !rounded !border border-gray-50");
             }
         });
     }
@@ -187,7 +187,7 @@ $(document).ready(function (){
         food = null;
         
         // Clear grid
-        $(".tile").removeClass("bg-gray-600 bg-gray-500 bg-blue-600 rounded head snake-piece border border-gray-50 food");
+        $(".tile").removeClass("bg-gray-600 bg-gray-500 bg-blue-600 !rounded head snake-piece !border border-gray-50 food");
         
         // Reinitialize game
         initializeSnake();
