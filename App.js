@@ -71,14 +71,13 @@ $(document).ready(function (){
         }
         
         if(gameOver) {
-            alert(`Game Over! Score: ${score}`);
+            endGame();
             return;
         }
         
         // Check collision with self
         if(snake.body.includes(newHead)) {
-            gameOver = true;
-            alert(`Game Over! Score: ${score}`);
+            endGame()
             return;
         }
         
@@ -192,6 +191,30 @@ $(document).ready(function (){
         initializeSnake();
         createFood();
     }
+
+    // end game 
+    const endGame = () => {
+        gameOver = true;
+        alert(`Game Over! Score: ${score}`);
+    }
+
+    // handle custom navigation button
+    $("#move-up").on('click', () => {
+        if(gameOver) return;
+        snake.direction = 'up';
+    });
+    $("#move-down").on('click', () => {
+        if(gameOver) return;
+        snake.direction = 'down';
+    });
+    $("#move-left").on('click', () => {
+        if(gameOver) return;
+        snake.direction = 'left';
+    });
+    $("#move-right").on('click', () => {
+        if(gameOver) return;
+        snake.direction = 'right';
+    });
 
     // Initialize game
     createGrid();
