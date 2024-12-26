@@ -1,13 +1,12 @@
-#snake-grid{
+#snake-grid {
     display: grid;
-    grid-template-columns: repeat(var(--columns),1fr);
-    grid-template-rows: repeat(var(--rows),1fr);
-    transition: 1s;
-}
-.head, .snake-piece {
-    transition: 500ms;
+    grid-template-columns: repeat(var(--columns), 12px);
+    grid-template-rows: repeat(var(--rows), 12px);
+    gap: 1px;
 }
 
 .tile {
-    outline: 1px solid rgb(212, 212, 219);
+    width: 12px;
+    height: 12px;
+    outline: 1px solid rgb(239, 239, 232);
 }
