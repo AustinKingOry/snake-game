@@ -20,6 +20,9 @@
                 <button id="toggle-controls" class="flex items-center justify-center w-10 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
                     <i class="bi-keyboard"></i>
                 </button>
+                <button id="reset-game" class="flex items-center justify-center w-8 h-6 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <i class="bi-arrow-counterclockwise"></i>
+                </button>
                 <div class="text-xl font-mono text-gray-600 font-bold">Score: <span id="score">0</span></div>
                 <div class="toast align-items-center text-bg-primary border-0 fixed bottom-1 right-1" id="responseToast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="d-flex">
@@ -31,7 +34,7 @@
             </div>
         </div>
         <div class="relative w-72 hidden flex-row gap-2" id="controls">
-            <div class="grid grid-cols-2 gap-1 bg-gray-500 rounded-md w-32 h-32">
+            <div class="grid grid-cols-2 gap-1 bg-gray-500 rounded-md w-32 h-28">
                 <div class="col-span-2 flex items-start justify-center">
                     <button id="move-up" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-up-short"></i>
@@ -40,9 +43,6 @@
                 <div class="col-span-2 flex flex-row justify-between gap-2">                    
                     <button id="move-left" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-left-short"></i>
-                    </button>
-                    <button id="reset-game" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
-                        <i class="bi-arrow-counterclockwise"></i>
                     </button>
                     <button id="move-right" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
                         <i class="bi-arrow-right-short"></i>
