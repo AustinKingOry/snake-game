@@ -16,7 +16,7 @@
 </head>
 <body class="fixed h-screen w-screen overflow-hidden bg-gray-700">
     <div class="container max-w-7xl h-full w-full mx-auto flex flex-col items-center justify-center gap-0">
-        <div id="game-frame" class="cursor-pointer relative w-full min-[320px]:w-[300px] min-[360px]:w-[360px] sm:w-[480px] h-[540px] rounded-md rounded-b-none p-1 pb-0 overflow-hidden shadow-md bg-blue-300 mx-auto">
+        <div id="game-frame" class="cursor-pointer relative w-full min-[320px]:w-[300px] min-[360px]:w-[360px] sm:w-[480px] h-[550px] rounded-md rounded-b-none p-1 pb-0 overflow-hidden shadow-md bg-blue-300 mx-auto">
             <div class="h-[95%] w-full bg-gray-50 overflow-hiddens pb-8 pr-8" id="snake-grid">
             </div>
             <div class="w-full h-[5%] bg-blue-300 flex flex-row justify-between items-center">
@@ -40,20 +40,20 @@
             </div>
         </div>
         <div class="relative w-full min-[320px]:w-[300px] min-[360px]:w-[360px] sm:w-[480px] hidden flex-row gap-2" id="controls">
-            <div class="flex flex-col justify-between gap-1 items-center bg-gray-500 rounded-b-md w-52 h-20 p-1.5 ml-auto">
+            <div class="flex flex-col justify-between gap-1 items-center bg-white rounded-b-md w-52 h-20 p-1.5 ml-auto !border">
                 <div class="flex flex-row justify-between gap-2">
-                    <button id="move-up" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-up" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
                         <i class="bi-arrow-up-short"></i>
                     </button>
                 </div>
                 <div class="flex flex-row justify-between gap-2">                    
-                    <button id="move-left" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-left" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
                         <i class="bi-arrow-left-short"></i>
                     </button>
-                    <button id="move-down" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-down" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
                         <i class="bi-arrow-down-short"></i>
                     </button>
-                    <button id="move-right" class="flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <button id="move-right" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
                         <i class="bi-arrow-right-short"></i>
                     </button>
                 </div>
