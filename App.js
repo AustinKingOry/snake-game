@@ -236,4 +236,10 @@ $(document).ready(function (){
         isVisible ? $("#controls").addClass("hidden") : $("#controls").addClass("flex");
         isVisible ? $("#controls").removeClass("flex") : $("#controls").removeClass("hidden");
     });
+
+    $("#toggle-interactions").on("click", function (){
+        let isVisible = $("#interactions").hasClass("block");
+        isVisible ? $("#interactions").addClass("hidden") : $("#interactions").addClass("block");
+        isVisible ? $("#interactions").removeClass("block") : $("#interactions").removeClass("hidden");
+    })
 });
