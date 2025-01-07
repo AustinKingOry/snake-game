@@ -1,4 +1,9 @@
 $(document).ready(function (){
+    $("#toggle-interactions").on("click", function (){
+        let isVisible = $("#interactions").hasClass("block");
+        isVisible ? $("#interactions").addClass("hidden") : $("#interactions").addClass("block");
+        isVisible ? $("#interactions").removeClass("block") : $("#interactions").removeClass("hidden");
+    })
     $('.tab-trigger').on('click',function(){
         let is_active = $(this).hasClass('active');
         if(is_active){
