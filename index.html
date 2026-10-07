@@ -2,152 +2,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#374151">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="App.css">
-    <!-- <script src="../plugins/tailwind.js"></script>
-    <script src="../plugins/jquery-3.7.0.min.js"></script> -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="App.css">
 </head>
-<body class="fixed h-screen w-screen overflow-hidden bg-gray-700">
-    <div class="flex flex-row gap-2 max-w-7xl h-full w-full mx-auto">
-        <div class="max-w-7xl mx-auto flex flex-col items-center justify-center gap-0 transition delay-300">
-            <div id="game-frame" class="cursor-pointer relative w-full min-[320px]:w-[300px] min-[360px]:w-[360px] sm:w-[480px] h-[500px] sm:h-[550px] rounded-md rounded-b-none p-1 pb-0 overflow-hidden shadow-md bg-blue-300 mx-auto">
-                <div class="h-[95%] w-full bg-gray-50 overflow-hiddens pb-8 pr-8" id="snake-grid">
+<body>
+    <div class="layout">
+        <div class="column">
+            <div id="game-frame" class="frame">
+                <div id="snake-grid" class="grid-area">
+                    <canvas id="canvas" aria-label="Snake game board" role="img"></canvas>
+                    <div id="hint" class="hint" role="status" aria-live="polite"></div>
+                    <div id="flash" class="flash" aria-hidden="true" hidden></div>
                 </div>
-                <div class="w-full h-[5%] bg-blue-300 flex flex-row justify-between items-center">
-                    <button id="toggle-controls" class="flex items-center justify-center w-10 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
-                        <i class="bi-keyboard"></i>
+                <div class="bar">
+                    <button id="toggle-controls" class="btn-sm btn-light w40" type="button" aria-label="Toggle on-screen controls" aria-pressed="false" title="On-screen controls">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M14 5H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1M2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><path d="M13 10.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm0-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5 0A.25.25 0 0 1 8.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 8 8.75zm2 0a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5A.25.25 0 0 1 10 8.75zm1 2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5-2A.25.25 0 0 1 6.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 6 8.75zm-2 0A.25.25 0 0 1 4.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 4 8.75zm-2 0A.25.25 0 0 1 2.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 2 8.75zm11-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0A.25.25 0 0 1 9.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 9 6.75zm-2 0A.25.25 0 0 1 7.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 7 6.75zm-2 0A.25.25 0 0 1 5.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 5 6.75zm-3 0A.25.25 0 0 1 2.25 6h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5A.25.25 0 0 1 2 6.75z"/></svg>
                     </button>
-                    <button id="aboutModalBtn" class="flex items-center justify-center w-6 h-6 bg-gray-100 text-black rounded hover:bg-gray-200" data-bs-toggle="modal" data-bs-target="#aboutModal">
-                        <i class="bi-question"></i>
+                    <button id="aboutModalBtn" class="btn-sm btn-light w24" type="button" aria-label="How to play" title="How to play">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/></svg>
                     </button>
-                    <button id="reset-game" class="flex items-center justify-center w-8 h-6 bg-blue-500 text-white rounded hover:bg-blue-600">
-                        <i class="bi-arrow-counterclockwise"></i>
+                    <button id="reset-game" class="btn-sm btn-blue w32" type="button" aria-label="Reset game" title="Reset (R)">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/></svg>
                     </button>
-                    <button id="toggle-interactions" class="hidden min-[320px]:flex items-center justify-center w-6 h-6 bg-gray-100 text-black rounded hover:bg-gray-200">
-                        <i class="bi-chat"></i>
+                    <button id="toggle-interactions" class="btn-sm btn-light w24" type="button" aria-label="Leaderboard and stats" aria-pressed="false" title="Leaderboard and stats">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105"/></svg>
                     </button>
-                    <div class="text-xl font-mono text-gray-600 font-bold bg-white px-2">Score: <span id="score">0</span></div>
-                    <div class="toast align-items-center text-bg-primary border-0 fixed bottom-1 right-1" id="responseToast" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="d-flex">
-                        <div class="toast-body" id="toast-message"></div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                    </div>
-                      
+                    <div class="score">Score: <span id="score">0</span><span id="level-chip" class="lv" title="Level">Lv 1</span></div>
                 </div>
             </div>
-            <div class="relative w-full min-[320px]:w-[300px] min-[360px]:w-[360px] sm:w-[480px] hidden flex-row gap-2" id="controls">
-                <div class="flex flex-col justify-between gap-1 items-center bg-white rounded-b-md w-52 h-20 p-1.5 ml-auto !border">
-                    <div class="flex flex-row justify-between gap-2">
-                        <button id="move-up" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
-                            <i class="bi-arrow-up-short"></i>
-                        </button>
+
+            <div id="controls" class="controls" hidden>
+                <div class="pad">
+                    <div class="pad-row">
+                        <button id="move-up" type="button" aria-label="Up"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/></svg></button>
                     </div>
-                    <div class="flex flex-row justify-between gap-2">                    
-                        <button id="move-left" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
-                            <i class="bi-arrow-left-short"></i>
-                        </button>
-                        <button id="move-down" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
-                            <i class="bi-arrow-down-short"></i>
-                        </button>
-                        <button id="move-right" class="font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 flex items-center justify-center w-8 h-8 rounded hover:bg-blue-600">
-                            <i class="bi-arrow-right-short"></i>
-                        </button>
+                    <div class="pad-row">
+                        <button id="move-left" type="button" aria-label="Left"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg></button>
+                        <button id="move-down" type="button" aria-label="Down"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/></svg></button>
+                        <button id="move-right" type="button" aria-label="Right"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></svg></button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="h-full bg-gray-50 sm:w-96 pb-3.5 ml-auto rounded-md overflow-hidden transition delay-300 hidden" id="interactions">
-            <ul class="flex nav !flex-row justify-between -mb-px x-scrollable hidden-scroll-bar bg-gray-50" role="tablist">
-                <li class="w-[49%] flex items-end justify-center" role="presentation">
-                    <button class="tab-trigger h-14 text-sm sm:text-base font-bold w-full inline-block p-4 text-blue-600 border-b-2 border-blue-600 active dark:!text-blue-500 dark:!border-blue-500" id="leaderboard_tab" role="presentation" aria-current="page" data-bs-toggle="tab" data-bs-target="#leaderboard" type="button" role="tab" aria-controls="leaderboard" aria-selected="true">Leaderboard</button>
-                </li>
-                <li class="w-[49%] flex items-end justify-center" role="presentation">
-                    <button class="tab-trigger h-14 text-sm sm:text-base font-bold w-full inline-block p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:!text-gray-300" id="user_data_tab" role="presentation" data-bs-toggle="tab" data-bs-target="#user_data" type="button" role="tab" aria-controls="user data" aria-selected="true">My Data</button>
-                </li>
+
+        <aside id="interactions" class="interactions" hidden aria-label="Leaderboard and stats">
+            <ul class="tabs" role="tablist">
+                <li role="presentation"><button class="tab active" id="leaderboard_tab" role="tab" aria-selected="true" aria-controls="leaderboard" type="button">Leaderboard</button></li>
+                <li role="presentation"><button class="tab" id="user_data_tab" role="tab" aria-selected="false" aria-controls="user_data" type="button">My Data</button></li>
             </ul>
-            <div class="tab-content p-0" id="PostsTabContent">
-                <div class="w-full tab-pane fade show active" id="leaderboard" aria-labelledby="leaderboard_tab">
-                    <div class="w-full p-6">
-                        <p class="text-2xl font-bold text-gray-400">Leaderboard Coming Real Soon! Feel free to contribute on github!</p>
-                    </div>
-                </div>                
-                <div class="w-full tab-pane fade" id="user_data" aria-labelledby="user_data_tab">
-                    <div class="w-full p-6">
-                        <p class="text-2xl font-bold text-gray-400">User Management Coming Real Soon! Feel free to contribute on github!</p>
-                    </div>
+            <div class="tab-pane" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard_tab">
+                <ol id="runs-list" class="runs"></ol>
+                <p class="muted">Saved on this device. An online leaderboard is coming soon. Feel free to contribute on GitHub!</p>
+            </div>
+            <div class="tab-pane" id="user_data" role="tabpanel" aria-labelledby="user_data_tab" hidden>
+                <dl id="stats-list" class="stats"></dl>
+                <button type="button" class="link" id="btn-clear">Clear my data</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Game over toast -->
+    <div id="responseToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" hidden>
+        <div id="toast-message"></div>
+        <button type="button" class="toast-close" id="toast-close" aria-label="Close">&times;</button>
+    </div>
+
+    <!-- How to play -->
+    <dialog id="aboutModal" class="modal" aria-labelledby="aboutModalLabel">
+        <div class="modal-header">
+            <h1 id="aboutModalLabel">How To Play</h1>
+            <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h2>Controls</h2>
+            <div class="two-col">
+                <div>
+                    <h3>Keyboard</h3>
+                    <ul>
+                        <li>↑ Move Up</li>
+                        <li>↓ Move Down</li>
+                        <li>← Move Left</li>
+                        <li>→ Move Right</li>
+                        <li>WASD works too</li>
+                        <li>Space or P to pause</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Touch/Click</h3>
+                    <ul>
+                        <li>Tap/click the grid to direct the snake</li>
+                        <li>Swipe anywhere on the grid</li>
+                        <li>Use on-screen controls (toggle with <svg class="inline-i" viewBox="0 0 16 16" aria-label="keyboard"><path fill-rule="evenodd" d="M14 5H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1M2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/></svg>)</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="aboutModalLabel">How To Play</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="space-y-4">
-                    <div>
-                        <h5 class="font-bold mb-2">Controls</h5>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <h6 class="font-semibold">Keyboard</h6>
-                                <ul class="list-disc pl-4">
-                                    <li>↑ Move Up</li>
-                                    <li>↓ Move Down</li>
-                                    <li>← Move Left</li>
-                                    <li>→ Move Right</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h6 class="font-semibold">Touch/Click</h6>
-                                <ul class="list-disc pl-4">
-                                    <li>Tap/click grid to direct snake</li>
-                                    <li>Use on-screen controls (toggle with <i class="bi-keyboard"></i>)</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div>
-                        <h5 class="font-bold mb-2">Game Rules</h5>
-                        <ul class="list-disc pl-4">
-                            <li>Guide the snake to eat blue food squares</li>
-                            <li>Each food eaten adds 10 points</li>
-                            <li>Snake grows longer with each food eaten</li>
-                            <li>Game ends if snake hits wall or itself</li>
-                        </ul>
-                    </div>
+            <h2>Game Rules</h2>
+            <ul>
+                <li>Guide the snake to eat the blue squares</li>
+                <li>Each food eaten adds 10 points</li>
+                <li>A yellow square appears after every 4th food. It's worth 30 but disappears quickly</li>
+                <li>Snake grows longer with each food eaten, and speeds up every 5 foods</li>
+                <li>Game ends if snake hits a wall (in Walls mode) or itself</li>
+            </ul>
 
-                    <div>
-                        <h5 class="font-bold mb-2">Buttons</h5>
-                        <ul class="list-none space-y-2">
-                            <li><i class="bi-keyboard"></i> - Toggle on-screen controls</li>
-                            <li><i class="bi-arrow-counterclockwise"></i> - Reset game</li>
-                            <li><i class="bi-question"></i> - Show this help</li>
-                        </ul>
-                    </div>
-                </div>
+            <h2>Game Mode</h2>
+            <div class="seg" role="radiogroup" aria-label="Game mode">
+                <button type="button" role="radio" data-set-mode="walls" aria-checked="true">Walls</button>
+                <button type="button" role="radio" data-set-mode="wrap" aria-checked="false">Wrap</button>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Got It!</button>
-            </div>
+            <p class="muted" id="mode-copy"></p>
+            <label class="check"><input type="checkbox" id="fx-toggle"> Visual effects</label>
+            <label class="check"><input type="checkbox" id="sound-toggle"> Sound &amp; vibration</label>
+
+            <h2>Buttons</h2>
+            <ul class="plain">
+                <li><svg class="inline-i" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M14 5H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1M2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/></svg> - Toggle on-screen controls</li>
+                <li><svg class="inline-i" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/></svg> - Reset game</li>
+                <li><svg class="inline-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894"/></svg> - Show leaderboard and your stats</li>
+                <li><b>?</b> - Show this help</li>
+            </ul>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-secondary" data-close>Got It!</button>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
+    </dialog>
+
     <script src="App.js"></script>
-    <script src="Interaction.js"></script>
 </body>
 </html>

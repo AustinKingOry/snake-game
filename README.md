@@ -1,94 +1,41 @@
 # Snake Game
 
-A modern implementation of the classic Snake game using JavaScript, HTML, and CSS Grid. This game features both keyboard and click/touch controls, making it playable across different devices.
+A classic Snake game in plain HTML, CSS and JavaScript. No build step, no dependencies: open `index.html` and play.
 
-## 🎮 Demo Features
+## How to play
 
-- Responsive grid-based gameplay
-- Dual control systems (keyboard & click/touch)
-- Score tracking
-- Mobile-friendly controls
-- Game reset functionality
-- Clean, modern UI with Tailwind CSS
+- **Steer:** arrow keys or WASD, tap/click the grid to head toward that spot, swipe on a touch screen, or use the on-screen controls (keyboard button).
+- **Eat the blue squares** for 10 points each. A **yellow square** appears after every 4th food. It's worth 30 but disappears quickly.
+- The snake **speeds up every 5 foods**.
+- **Pause:** Space or P (it also pauses when you switch tabs). **Reset:** R or the reset button.
+- The **?** button opens the in-game guide, where you can also switch mode and turn **visual effects** and **sound & vibration** on or off.
 
-## 🚀 Getting Started
+### Modes (in the How To Play dialog)
 
-### Prerequisites
-- A modern web browser
-- Internet connection (for CDN resources)
+- **Walls:** hitting the edge ends the run.
+- **Wrap:** the edges loop around to the opposite side.
 
-### Installation
-1. Clone the repository:
-```bash
-git clone https://github.com/AustinKingOry/snake-game.git
-```
-2. Open `index.html` in your web browser
+Effects are small and match the tile look: a pop of square particles and a floating `+10` when you eat, eyes on the head, a quick frame shake when you crash, and a "Level 2" flash when the speed goes up. They're skipped automatically if your system asks for reduced motion.
 
-## 🎯 How to Play
+Your best runs and stats are saved in your browser (`localStorage`) and shown in the chat-bubble panel (Leaderboard / My Data).
 
-### Keyboard Controls
-- Use arrow keys (↑, ↓, ←, →) to change the snake's direction
-- Snake will continue moving in the current direction until a new direction is chosen
+## Project layout
 
-### Mouse/Touch Controls
-- Click or tap anywhere on the grid to direct the snake
-- The snake will move towards the clicked location while following game rules
-- Use the on-screen control pad (toggle with keyboard icon) for touch devices
+| File | What it does |
+| --- | --- |
+| `index.html` | Page structure, How To Play dialog, side panel |
+| `App.css` | Visual design |
+| `App.js` | `Engine` (pure game rules) and the UI (canvas, input, saving) |
+| `tests/engine.test.js` | Unit tests for the rules |
 
-### Game Rules
-- Guide the snake to eat the blue food squares
-- Each food square eaten increases your score by 10 points
-- Game ends if the snake:
-  - Hits the wall
-  - Collides with itself
+Run the tests with `node tests/engine.test.js` (no install needed).
 
-### Additional Controls
-- Click the reset button (↺) to start a new game
-- Toggle the on-screen controls with the keyboard icon button
+## Customization
 
-## 🛠️ Technical Details
+- Tile size: `TILE` in `App.js`. The grid fills the frame automatically.
+- Speed curve, points and bonus timing: `tickMs`, `POINTS`, `FRUIT_PER_LEVEL`, `BONUS_EVERY`, `BONUS_TICKS` at the top of `App.js`.
+- Colors: the `C` object in `App.js` (snake and food) and the variables at the top of `App.css`.
 
-### Built With
-- HTML5
-- CSS3 (Grid & Flexbox)
-- JavaScript (jQuery)
-- Tailwind CSS
-- Bootstrap 5 (for components)
-- Bootstrap Icons
+## License
 
-### Game Features
-- Responsive grid system
-- Collision detection
-- Score tracking
-- Toast notifications
-- Mobile-responsive design
-
-## 🎨 Customization
-
-The game can be customized by modifying:
-- Grid size in `App.js` (tileWidth and tileHeight)
-- Snake speed (setInterval value)
-- Colors (via Tailwind classes)
-- Grid appearance (App.css)
-
-## 📱 Browser Compatibility
-
-Tested and working on:
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the MIT License.
+MIT. See `License`.
