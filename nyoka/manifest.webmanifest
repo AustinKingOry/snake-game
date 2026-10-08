@@ -1,0 +1,18 @@
+{
+  "id": "snake-nyoka",
+  "name": "Nyoka: Snake",
+  "short_name": "Nyoka",
+  "description": "A smooth, mobile-friendly snake game. Eat mangoes, chase golden bonuses, and beat your best run. Works offline.",
+  "start_url": "./index.html?source=pwa",
+  "scope": "../",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0e1c15",
+  "theme_color": "#0e1c15",
+  "categories": ["games"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

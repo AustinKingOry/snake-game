@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#374151">
+    <meta name="theme-color" content="#93c5fd">
+    <meta name="description" content="A classic Snake game. Eat, grow, and beat your best run. Works offline.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Snake">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Snake Game</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="App.css">
@@ -118,6 +125,13 @@
             <label class="check"><input type="checkbox" id="fx-toggle"> Visual effects</label>
             <label class="check"><input type="checkbox" id="sound-toggle"> Sound &amp; vibration</label>
 
+            <div data-install-section hidden>
+                <h2>Install</h2>
+                <p class="muted" style="margin-top:0">Add the game to your home screen or desktop. It works offline.</p>
+                <button type="button" class="btn-secondary install" data-install hidden>Install app</button>
+                <p class="muted" data-install-tip hidden>On iPhone or iPad: tap the Share button, then <b>Add to Home Screen</b>.</p>
+            </div>
+
             <h2>Buttons</h2>
             <ul class="plain">
                 <li><svg class="inline-i" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M14 5H2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1M2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/></svg> - Toggle on-screen controls</li>
@@ -127,10 +141,13 @@
             </ul>
         </div>
         <div class="modal-footer">
+            <a class="switch-link" href="nyoka/index.html">Try the Nyoka look</a>
             <button type="button" class="btn-secondary" data-close>Got It!</button>
         </div>
     </dialog>
 
+    <script src="pwa.js"></script>
+    <script src="engine.js"></script>
     <script src="App.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 // Run with: node tests/engine.test.js
 const assert = require('assert');
-const { Engine } = require('../App.js');
+const { Engine } = require('../engine.js');
 
 let passed = 0;
 const test = (name, fn) => { fn(); passed++; console.log('ok  ' + name); };
