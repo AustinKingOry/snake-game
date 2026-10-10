@@ -44,6 +44,8 @@
     dpadToggle: $('#btn-dpad'),
     dpad: $('#dpad'),
     runs: $('#runs-list'),
+    runsSheet: $('#runs-sheet'),
+    runsBtn: $('#btn-runs'),
     clear: $('#btn-clear'),
   };
 
@@ -293,6 +295,25 @@
     if (e.target === helpModal || e.target.closest('[data-close]')) helpModal.close();
   });
 
+  /* ---------- best-runs sheet (phones) ---------- */
+  const narrow = window.matchMedia('(max-width: 899px)');
+  const sheetOpen = () => narrow.matches && el.runsSheet.classList.contains('open');
+  function openSheet() {
+    pause();
+    el.runsSheet.classList.add('open');
+  }
+  function closeSheet() {
+    el.runsSheet.classList.remove('open');
+  }
+  el.runsBtn.addEventListener('click', (e) => {
+    e.currentTarget.blur();
+    openSheet();
+  });
+  $('#btn-runs-close').addEventListener('click', closeSheet);
+  el.runsSheet.addEventListener('click', (e) => {
+    if (e.target === el.runsSheet) closeSheet();
+  });
+
   /* ---------- input ---------- */
   const KEY_DIR = {
     ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right',
@@ -306,6 +327,10 @@
   }
 
   document.addEventListener('keydown', (e) => {
+    if (sheetOpen()) {
+      if (e.key === 'Escape') closeSheet();
+      return;
+    }
     if (e.metaKey || e.ctrlKey || e.altKey || helpModal.open) return;
     const dir = KEY_DIR[e.key];
     if (dir) {
@@ -331,23 +356,23 @@
     }
   });
 
-  // Swipe to steer
+  // Swipe to steer. Listens on the whole screen (not just the board) so a thumb
+  // that starts or drifts off the board still steers instead of scrolling.
   let swipe = null;
-  board.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'mouse') return;
-    swipe = { x: e.clientX, y: e.clientY };
+  document.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' || helpModal.open || sheetOpen()) return;
+    if (e.target.closest('dialog, .runs')) return;
+    swipe = { x: e.clientX, y: e.clientY, id: e.pointerId };
   });
-  board.addEventListener('pointermove', (e) => {
-    if (!swipe) return;
+  document.addEventListener('pointermove', (e) => {
+    if (!swipe || e.pointerId !== swipe.id) return;
     const dx = e.clientX - swipe.x;
     const dy = e.clientY - swipe.y;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 22) return;
-    swipe = { x: e.clientX, y: e.clientY };
+    swipe = { x: e.clientX, y: e.clientY, id: e.pointerId };
     steer(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : dy > 0 ? 'down' : 'up');
   });
-  ['pointerup', 'pointercancel', 'pointerleave'].forEach((t) =>
-    board.addEventListener(t, () => (swipe = null))
-  );
+  ['pointerup', 'pointercancel'].forEach((t) => document.addEventListener(t, () => (swipe = null)));
 
   // On-screen d-pad
   el.dpad.addEventListener('pointerdown', (e) => {
@@ -379,6 +404,7 @@
   });
   function syncDpad() {
     el.dpad.hidden = !store.dpad;
+    document.body.classList.toggle('has-dpad', store.dpad);
     el.dpadToggle.setAttribute('aria-pressed', String(store.dpad));
   }
   el.dpadToggle.addEventListener('click', () => {

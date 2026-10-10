@@ -37,6 +37,9 @@
             </div>
 
             <div class="toolbar">
+                <button class="icon-btn only-narrow" id="btn-runs" type="button" aria-label="Best runs" title="Best runs">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 20h6M10 17h4"/></svg>
+                </button>
                 <button class="icon-btn" id="btn-help" type="button" aria-label="How to play" title="How to play">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 9.2a3 3 0 1 1 4.3 2.7c-.9.5-1.5 1.1-1.5 2.1M12 17.5v.01"/></svg>
                 </button>
@@ -61,14 +64,19 @@
             </div>
         </section>
 
-        <aside class="runs" aria-labelledby="runs-title">
-            <div class="runs-head">
-                <h2 id="runs-title">Your best runs</h2>
-                <button type="button" class="link-btn" id="btn-clear" hidden>Clear</button>
+        <aside class="runs" id="runs-sheet" aria-labelledby="runs-title">
+            <div class="runs-card">
+                <div class="runs-head">
+                    <h2 id="runs-title">Your best runs</h2>
+                    <div class="runs-actions">
+                        <button type="button" class="link-btn" id="btn-clear" hidden>Clear</button>
+                        <button type="button" class="runs-close" id="btn-runs-close" aria-label="Close">&times;</button>
+                    </div>
+                </div>
+                <ol id="runs-list"></ol>
+                <p class="note">Saved on this device only.</p>
+                <a class="switch-link" href="../index.html">Switch to the classic look</a>
             </div>
-            <ol id="runs-list"></ol>
-            <p class="note">Saved on this device only.</p>
-            <a class="switch-link" href="../index.html">Switch to the classic look</a>
         </aside>
     </main>
 

@@ -9,12 +9,15 @@
     --leaf: #58b947;
     --mango: #ffa62b;
     --mango-ink: #2a1700;
-    --board: min(calc(100vw - 32px), 560px, calc(100dvh - 250px));
     color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+
+/* The game screen is a fixed surface: it never scrolls, so swipes only steer. */
+html { overflow: hidden; overscroll-behavior: none; }
+body { position: fixed; inset: 0; width: 100%; overflow: hidden; overscroll-behavior: none; }
 
 body {
     margin: 0;
@@ -28,22 +31,27 @@ body {
 
 /* ---------- layout ---------- */
 .shell {
-    min-height: 100%;
+    --extra: 0px;
+    --board: min(calc(100vw - 32px), 560px, calc(100dvh - 250px - var(--extra)));
+    height: 100%;
+    overflow: hidden;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "top" "stage" "runs";
     justify-items: center;
-    align-content: start;
+    align-content: center;
     gap: 14px;
     padding: max(14px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
 }
+.has-dpad .shell { --extra: 130px; }
+.top, .stage { touch-action: none; }
 .top { grid-area: top; width: var(--board); min-width: 280px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
 .stage { grid-area: stage; width: var(--board); min-width: 280px; display: flex; flex-direction: column; gap: 12px; }
 .runs { grid-area: runs; width: var(--board); min-width: 280px; }
 
 @media (min-width: 900px) {
-    :root { --board: min(560px, calc(100dvh - 190px)); }
     .shell {
+        --board: min(560px, calc(100dvh - 190px - var(--extra)));
         grid-template-columns: auto 260px;
         grid-template-areas: "top runs" "stage runs";
         justify-content: center;
@@ -52,6 +60,7 @@ body {
     }
     .top, .stage { justify-self: end; }
     .runs { width: 100%; min-width: 0; align-self: start; margin-top: 6px; }
+    .runs-close { display: none; }
 }
 
 /* ---------- header ---------- */
@@ -136,7 +145,20 @@ body {
 .dpad svg { width: 26px; height: 26px; stroke-width: 2.4; }
 
 /* ---------- best runs ---------- */
-.runs { padding: 14px 16px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.runs-card { padding: 14px 16px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.runs-actions { display: flex; align-items: center; gap: 4px; }
+.runs-close { background: none; border: 0; color: var(--muted); font-size: 28px; line-height: 1; cursor: pointer; padding: 0 4px; }
+.runs-close:hover { color: var(--text); }
+.icon-btn.only-narrow { display: none; }
+
+/* On phones the scores live in a sheet that opens on demand, so nothing
+   sits below the board to make the page scroll. */
+@media (max-width: 899px) {
+    .icon-btn.only-narrow { display: grid; }
+    .runs { display: none; position: fixed; inset: 0; z-index: 30; padding: 16px; width: auto; min-width: 0; background: rgba(4, 12, 8, 0.7); place-items: center; touch-action: none; }
+    .runs.open { display: grid; }
+    .runs-card { width: min(100%, 420px); max-height: 100%; overflow: auto; touch-action: pan-y; overscroll-behavior: contain; }
+}
 .runs-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
 .runs h2 { margin: 0; font-size: 18px; font-weight: 700; }
 .link-btn { font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; padding: 4px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
@@ -161,7 +183,7 @@ body {
 .help-head h2 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; font-variation-settings: "opsz" 72; }
 .help-close { background: none; border: 0; color: var(--muted); font-size: 28px; line-height: 1; cursor: pointer; padding: 0 4px; }
 .help-close:hover { color: var(--text); }
-.help-body { padding: 4px 18px 12px; overflow: auto; font-size: 15px; line-height: 1.5; }
+.help-body { padding: 4px 18px 12px; overflow: auto; overscroll-behavior: contain; font-size: 15px; line-height: 1.5; }
 .help-body h3 { margin: 14px 0 6px; font-size: 16px; font-weight: 700; }
 .help-body h4 { margin: 0 0 4px; font-size: 14px; color: var(--muted); font-weight: 600; }
 .help-body ul { margin: 0; padding-left: 18px; color: #cfe4c9; }
@@ -175,5 +197,4 @@ body {
 
 /* ---------- focus + motion ---------- */
 :focus-visible { outline: 3px solid var(--mango); outline-offset: 2px; }
-@media (max-height: 640px) and (max-width: 899px) { .note, .runs { display: none; } }
 @media (prefers-reduced-motion: reduce) { .card, #score.pop { animation: none; } .btn { transition: none; } }

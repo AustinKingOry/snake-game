@@ -16,6 +16,7 @@ Both share the same rules (`engine.js`), so a fix there lands in both. Each one 
 - **Steer:** arrow keys or WASD, swipe on a touch screen, or the on-screen controls. In Classic you can also tap or click the grid to head toward that spot.
 - **Eat** the blue squares (Classic) or mangoes (Nyoka) for 10 points each. A **yellow / golden** one appears after every 4th food. It's worth 30 but disappears quickly.
 - The snake **speeds up every 5 foods**.
+- **Phones (Nyoka):** the game screen never scrolls, and swipes steer from anywhere on screen. Best runs open from the trophy button instead of sitting under the board.
 - **Pause:** Space or P (it also pauses when you switch tabs). **Restart:** R.
 - The **?** button opens the in-game guide. Classic's guide also has the mode switch and the **visual effects** and **sound & vibration** toggles.
 
