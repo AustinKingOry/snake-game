@@ -356,23 +356,12 @@
     }
   });
 
-  // Swipe to steer. Listens on the whole screen (not just the board) so a thumb
-  // that starts or drifts off the board still steers instead of scrolling.
-  let swipe = null;
-  document.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'mouse' || helpModal.open || sheetOpen()) return;
-    if (e.target.closest('dialog, .runs')) return;
-    swipe = { x: e.clientX, y: e.clientY, id: e.pointerId };
+  // Swipe to steer, using the shared detector (see ../swipe.js). It listens on the
+  // whole screen, not just the board, so a thumb that starts or drifts off the
+  // board still steers instead of scrolling.
+  createSwipe(document, steer, {
+    ignore: (e) => helpModal.open || sheetOpen() || !!e.target.closest('dialog, .runs'),
   });
-  document.addEventListener('pointermove', (e) => {
-    if (!swipe || e.pointerId !== swipe.id) return;
-    const dx = e.clientX - swipe.x;
-    const dy = e.clientY - swipe.y;
-    if (Math.max(Math.abs(dx), Math.abs(dy)) < 22) return;
-    swipe = { x: e.clientX, y: e.clientY, id: e.pointerId };
-    steer(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : dy > 0 ? 'down' : 'up');
-  });
-  ['pointerup', 'pointercancel'].forEach((t) => document.addEventListener(t, () => (swipe = null)));
 
   // On-screen d-pad
   el.dpad.addEventListener('pointerdown', (e) => {

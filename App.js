@@ -492,23 +492,21 @@ if (typeof document !== 'undefined') {
       }
     });
 
-    // Grid: tap/click to steer, swipe to steer
-    let touch = null;
+    // Grid: swipe to steer (shared detector, see swipe.js) and tap/click to steer.
+    const swipe = createSwipe(gridArea, steer);
+    let press = null;
     gridArea.addEventListener('pointerdown', (e) => {
-      touch = { x: e.clientX, y: e.clientY, swiped: false };
-    });
-    gridArea.addEventListener('pointermove', (e) => {
-      if (!touch || e.pointerType === 'mouse') return;
-      const dx = e.clientX - touch.x;
-      const dy = e.clientY - touch.y;
-      if (Math.max(Math.abs(dx), Math.abs(dy)) < 22) return;
-      touch = { x: e.clientX, y: e.clientY, swiped: true };
-      steer(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : dy > 0 ? 'down' : 'up');
+      press = { x: e.clientX, y: e.clientY };
     });
     gridArea.addEventListener('pointerup', (e) => {
-      const t = touch;
-      touch = null;
-      if (!t || t.swiped) return;
+      const p = press;
+      press = null;
+      if (!p) return;
+      // A tap is a press that barely moved. Anything bigger was a swipe or an
+      // aborted swipe and must not also steer toward where the finger landed.
+      const isTouch = e.pointerType !== 'mouse';
+      const moved = isTouch ? swipe.moved : Math.hypot(e.clientX - p.x, e.clientY - p.y);
+      if ((isTouch && swipe.swiped) || moved > 12) return;
       if (phase === 'paused') return resume();
       if (phase === 'over' || phase === 'won') return startNew();
       const r = canvas.getBoundingClientRect();
@@ -517,7 +515,7 @@ if (typeof document !== 'undefined') {
       if (phase === 'ready') return startNew();
       steerToward(tx, ty);
     });
-    ['pointercancel', 'pointerleave'].forEach((t) => gridArea.addEventListener(t, () => (touch = null)));
+    ['pointercancel', 'pointerleave'].forEach((t) => gridArea.addEventListener(t, () => (press = null)));
 
     $('#reset-game').addEventListener('click', (e) => {
       resetGame();

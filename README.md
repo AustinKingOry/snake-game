@@ -42,6 +42,7 @@ It needs to be served over **HTTPS** (or `localhost`) for installing and offline
 | File | What it does |
 | --- | --- |
 | `engine.js` | Pure game rules, shared by both looks |
+| `swipe.js` | Swipe detection, shared by both looks (one swipe = one turn, wobbles ignored) |
 | `index.html`, `App.css`, `App.js` | Classic look |
 | `nyoka/index.html`, `nyoka/nyoka.css`, `nyoka/nyoka.js` | Nyoka look |
 | `manifest.webmanifest`, `nyoka/manifest.webmanifest` | App names, colors and icons for installing |
@@ -49,7 +50,7 @@ It needs to be served over **HTTPS** (or `localhost`) for installing and offline
 | `icons/`, `nyoka/icons/` | App icons (SVG sources and PNGs; regenerate PNGs if you change the SVGs) |
 | `tests/engine.test.js` | Unit tests for the rules |
 
-Run the tests with `node tests/engine.test.js` (no install needed).
+Run the tests with `node tests/engine.test.js` and `node tests/swipe.test.js` (no install needed).
 
 ## Customization
 

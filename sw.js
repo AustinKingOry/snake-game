@@ -4,7 +4,7 @@
  * Strategy: serve from cache instantly, refresh the cache in the background
  * (stale-while-revalidate). The newest files are used on the next launch.
  */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = `snake-${VERSION}`;
 const FONT_CACHE = 'snake-fonts';
 
@@ -14,6 +14,7 @@ const PRECACHE = [
   'App.css',
   'App.js',
   'engine.js',
+  'swipe.js',
   'pwa.js',
   'favicon.ico',
   'manifest.webmanifest',
